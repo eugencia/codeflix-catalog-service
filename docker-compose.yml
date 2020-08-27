@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  codeflix-catalog-app:
+    build: .
+    entrypoint: ./.docker/entrypoint.sh
+    container_name: codeflix-catalog-app
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=0.0.0.0
+    volumes:
+      - .:/home/node/app
+    networks:
+      - codeflix
+      - mensageria-service_codeflix
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
+    container_name: codeflix-catalog-elasticsearch
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./.docker/elasticdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - codeflix
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.1
+    container_name: codeflix-catalog-kibana
+    ports:
+      - 5601:5601
+    networks:
+      - codeflix
+
+networks:
+  codeflix:
+    driver: bridge
+  mensageria-service_codeflix:
+    external: true
