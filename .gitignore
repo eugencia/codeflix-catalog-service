@@ -65,4 +65,4 @@ typings/
 *.tsbuildinfo
 
 # Dados do elasticseaarch
-/elasticdata
+/data
