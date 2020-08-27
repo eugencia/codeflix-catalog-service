@@ -32,20 +32,14 @@ const config = {
         }
       }
     },
-    "description": {
-      "type": "text", //analisado
+    is_active: {
+      type: "boolean"
     },
-    "type": {
-      "type": "byte",
+    created_at: {
+      type: "date"
     },
-    "is_active": {
-      "type": "boolean"
-    },
-    "created_at": {
-      "type": "date"
-    },
-    "updated_at": {
-      "type": "date"
+    updated_at: {
+      type: "date"
     }
   }
 };
