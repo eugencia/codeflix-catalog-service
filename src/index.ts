@@ -1,3 +1,4 @@
+import './app';
 import {ApplicationConfig, CatalogApplication} from './application';
 
 export * from './application';
