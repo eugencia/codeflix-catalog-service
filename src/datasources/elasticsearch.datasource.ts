@@ -6,7 +6,7 @@ const config = {
   connector: 'es',
   index: 'codeflix',
   version: 7,
-  defaultSize: '',
+  // defaultSize: '50',
   debug: process.env.APP_ENV === 'local',
   ssl: {
     rejectUnauthorized: true
