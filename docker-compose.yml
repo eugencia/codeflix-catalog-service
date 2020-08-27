@@ -3,7 +3,7 @@ version: '3'
 services:
   codeflix-catalog-app:
     build: .
-    entrypoint: ./.docker/entrypoint.sh
+    entrypoint: ./entrypoint.sh
     container_name: codeflix-catalog-app
     ports:
       - 3000:3000
@@ -21,7 +21,7 @@ services:
     environment:
       - discovery.type=single-node
     volumes:
-      - ./.docker/elasticdata:/usr/share/elasticsearch/data
+      - ./elasticdata:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
