@@ -57,10 +57,12 @@ export class PingController {
 
   @get('/categories')
   async index() {
+    const id = Math.random() * 1000;
     await this.categoryRespository.create({
-      id: '1234',
+      id: `${id}`,
       name: 'second category',
-      description: ''
+      created_at: Date.now(),
+      updated_at: Date.now(),
     });
     return await this.categoryRespository.find();
   }
