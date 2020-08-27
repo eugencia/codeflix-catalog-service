@@ -45,25 +45,25 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^2.3.5",
-    "@loopback/core": "^2.9.1",
-    "@loopback/openapi-v3": "^3.4.5",
-    "@loopback/repository": "^2.9.0",
-    "@loopback/rest": "^5.2.0",
-    "@loopback/rest-explorer": "^2.2.6",
-    "@loopback/service-proxy": "^2.3.4",
+    "@loopback/boot": "^2.5.0",
+    "@loopback/core": "^2.9.4",
+    "@loopback/openapi-v3": "^3.4.8",
+    "@loopback/repository": "^2.11.1",
+    "@loopback/rest": "^6.1.0",
+    "@loopback/rest-explorer": "^2.2.9",
+    "@loopback/service-proxy": "^2.3.7",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@loopback/build": "^6.1.0",
+    "@loopback/build": "^6.2.1",
     "source-map-support": "^0.5.19",
-    "@loopback/testlab": "^3.2.0",
-    "@types/node": "^10.17.26",
-    "@loopback/eslint-config": "^8.0.3",
-    "eslint": "^7.3.1",
-    "typescript": "~3.9.5"
+    "@loopback/testlab": "^3.2.3",
+    "@types/node": "^10.17.28",
+    "@loopback/eslint-config": "^9.0.1",
+    "eslint": "^7.7.0",
+    "typescript": "~3.9.7"
   },
   "nodemonConfig": {
     "verbose": true,
