@@ -1,4 +1,4 @@
-import './app';
+import './bootstrap';
 import {ApplicationConfig, CatalogApplication} from './application';
 
 export * from './application';
