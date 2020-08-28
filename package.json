@@ -54,9 +54,11 @@
     "@loopback/service-proxy": "^2.3.7",
     "@types/amqp-connection-manager": "^2.0.10",
     "@types/amqplib": "^0.5.13",
+    "@types/lodash": "^4.14.160",
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
     "loopback-connector-es": "https://github.com/codeedu/loopback-connector-elastic-search/tarball/master",
     "nodemon": "^2.0.4",
     "tslib": "^2.0.0"
