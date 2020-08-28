@@ -32,6 +32,9 @@ const config = {
         }
       }
     },
+    "description": {
+      "type": "text", //analisado
+    },
     is_active: {
       type: "boolean"
     },
