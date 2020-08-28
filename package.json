@@ -52,6 +52,7 @@
     "@loopback/rest": "^6.1.0",
     "@loopback/rest-explorer": "^2.2.9",
     "@loopback/service-proxy": "^2.3.7",
+    "@types/amqp-connection-manager": "^2.0.10",
     "@types/amqplib": "^0.5.13",
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.6.0",
