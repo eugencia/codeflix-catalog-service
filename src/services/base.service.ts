@@ -11,6 +11,7 @@ export interface Options {
 export abstract class BaseService {
   protected async build({repository, data, message}: Options) {
 
+    const {id} = data || {};
     const form = this.getForm(data, repository);
     console.log(form);
 
@@ -20,11 +21,11 @@ export abstract class BaseService {
         break;
 
       case 'updated':
-        await repository.updateById(form.id, form);
+        await repository.updateById(id, form);
         break;
 
       case 'deleted':
-        await repository.deleteById(form.id);
+        await repository.deleteById(id);
         break;
     }
   }
