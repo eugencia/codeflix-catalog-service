@@ -16,16 +16,14 @@ export abstract class BaseService {
     console.log(form);
 
     switch (this.getAction(message)) {
-      case 'created':
-        await repository.create(form);
-        break;
-
-      case 'updated':
-        await repository.updateById(id, form);
-        break;
-
       case 'deleted':
         await repository.deleteById(id);
+        break;
+      case 'created':
+      case 'updated':
+        repository.exists(id)
+          ? await repository.updateById(id, form)
+          : await repository.create(form)
         break;
     }
   }
