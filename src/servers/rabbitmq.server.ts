@@ -1,15 +1,22 @@
 import {Server, Context, inject, CoreBindings, Application, MetadataInspector, Binding} from '@loopback/core';
-import {Channel, Options, ConfirmChannel} from 'amqplib';
+import {Channel, Options, ConfirmChannel, Message} from 'amqplib';
 import {CategoryRepository} from '../repositories';
 import {repository} from '@loopback/repository';
 import {RabbitMQBindings} from '../keys';
 import {RabbitMQSubscribeMetadata, RABBITMQ_SUBSCRIBE_DECORATOR} from '../decorators/rabbitMQSubscribe.decorator';
 import {AmqpConnectionManagerOptions, connect, AmqpConnectionManager, ChannelWrapper} from 'amqp-connection-manager';
 
+export enum Acknowledgement {
+  ACK = 0,
+  NACK = 1,
+  REQUEUE = 2
+}
+
 export interface RabbitMQConfig {
   hosts: string[],
   options?: AmqpConnectionManagerOptions
   exchanges?: {name: string, type: string, options?: Options.AssertExchange}[],
+  acknowledgement?: Acknowledgement
 }
 
 export class RabbitMQServer extends Context implements Server {
@@ -62,11 +69,15 @@ export class RabbitMQServer extends Context implements Server {
           } catch (error) {
             data = null;
           }
-          await method({data, message, channel});
+
+          const acknowledgement = await method({data, message, channel});
+          this.dispacthAcknowledgement(channel, message, acknowledgement);
         }
       } catch (error) {
         console.error(error)
-        //respostas do nack, ack etc
+        if (!message) return;
+
+        this.dispacthAcknowledgement(channel, message, this.config?.acknowledgement);
       }
     });
   }
@@ -132,6 +143,25 @@ export class RabbitMQServer extends Context implements Server {
         channel.assertExchange(exchange.name, exchange.type, exchange.options);
       }));
     });
+  }
+
+  private dispacthAcknowledgement(channel: Channel, message: Message, acknowledgement?: Acknowledgement) {
+
+    switch (acknowledgement) {
+      case Acknowledgement.NACK:
+        channel.nack(message, false, false);
+        break;
+
+      case Acknowledgement.REQUEUE:
+        channel.nack(message, false, true);
+        break;
+
+      case Acknowledgement.REQUEUE:
+      default:
+        channel.ack(message);
+        break;
+    }
+
   }
 
   get listening(): boolean {

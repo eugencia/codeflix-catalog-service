@@ -42,6 +42,7 @@ if (require.main === module) {
       hosts: [
         `amqp://${process.env.RABBITMQ_USERNAME}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOSTNAME}`
       ],
+      acknowledgement: process.env.RABBITMQ_ACKNOWLEDGEMENT
       // exchanges: [
       //   {
       //     name: 'ex1',
