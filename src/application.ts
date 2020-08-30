@@ -1,8 +1,7 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig, Application} from '@loopback/core';
 import {
-  RestExplorerBindings,
-  RestExplorerComponent,
+  RestExplorerBindings
 } from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {ServiceMixin} from '@loopback/service-proxy';
@@ -48,5 +47,6 @@ export class CatalogApplication extends BootMixin(
     };
 
     this.server(RabbitMQServer);
+    this.component(ExplorerComponent);
   }
 }
