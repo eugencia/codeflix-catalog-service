@@ -1,6 +1,7 @@
 import {DefaultCrudRepository} from '@loopback/repository';
 import {Message} from 'amqplib';
 import {pick} from 'lodash';
+import {ValidatorService} from './validator.service';
 
 export interface Options {
   repository: DefaultCrudRepository<any, any>;
@@ -9,22 +10,40 @@ export interface Options {
 }
 
 export abstract class BaseService {
+
+  constructor(public validatorService: ValidatorService) {}
+
   protected async build({repository, data, message}: Options) {
 
     const {id} = data || {};
     const form = this.getForm(data, repository);
-    console.log(form);
 
     switch (this.getAction(message)) {
       case 'deleted':
         await repository.deleteById(id);
         break;
       case 'created':
+        await this.validatorService.validate({
+          data: form,
+          model: repository.entityClass
+        });
+        await repository.create(form)
+        break;
       case 'updated':
-        repository.exists(id)
+        const exists = await repository.exists(id);
+
+        await this.validatorService.validate({
+          data: form,
+          model: repository.entityClass,
+          ...(exists && {
+            options: {
+              partial: true
+            }
+          })
+        });
+        return exists
           ? await repository.updateById(id, form)
           : await repository.create(form)
-        break;
     }
   }
 
