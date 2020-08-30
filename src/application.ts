@@ -9,7 +9,7 @@ import path from 'path';
 import {MySequence} from './sequence';
 import {RabbitMQServer} from './servers';
 import {RestComponent, RestServer} from '@loopback/rest';
-import {ExplorerComponent} from './components';
+import {ExplorerComponent, ValidatorComponent} from './components';
 
 export {ApplicationConfig};
 
@@ -46,6 +46,9 @@ export class CatalogApplication extends BootMixin(
       },
     };
 
-    this.server(RabbitMQServer);
+    this.component(ValidatorComponent);
+
+    this.servers([RabbitMQServer]);
   }
 }
+
