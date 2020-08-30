@@ -6,20 +6,27 @@ export class Category extends Entity {
     type: 'string',
     id: true,
     generated: false,
-    required: true,
+    required: true
   })
   id: string;
 
   @property({
     type: 'string',
     required: true,
+    jsonSchema: {
+      minLength: 1,
+      maxLength: 255
+    }
   })
   name: string;
 
   @property({
     type: 'string',
     required: false,
-    default: ''
+    default: null,
+    jsonSchema: {
+      nullable: true
+    }
   })
   description: string;
 
