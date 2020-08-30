@@ -2,7 +2,7 @@ import {default as chalk} from 'chalk';
 import {CatalogApplication} from '../application';
 import * as config from "../../config";
 import {ElasticsearchDataSource} from '../datasources';
-import {Client} from 'es7';
+import {Client} from 'loopback-connector-es/node_modules/es7';
 import seeders from '../seeders';
 import {DefaultCrudRepository} from '@loopback/repository';
 
