@@ -47,6 +47,5 @@ export class CatalogApplication extends BootMixin(
     };
 
     this.server(RabbitMQServer);
-    this.component(ExplorerComponent);
   }
 }
